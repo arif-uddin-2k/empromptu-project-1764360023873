@@ -3,6 +3,7 @@ import cors from 'cors'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import rateLimit from 'express-rate-limit'
 
 dotenv.config()
 
@@ -13,6 +14,13 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
 app.use(cors())
 app.use(express.json())
 
+// Rate limiter for auth routes
+const authRateLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 10, // max 10 requests per IP per windowMs
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
 // Demo users for authentication
 const demoUsers = [
   {
@@ -50,7 +58,7 @@ const authenticateToken = (req, res, next) => {
 }
 
 // Auth routes
-app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth/login', authRateLimiter, async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -85,7 +93,7 @@ app.post('/api/auth/login', async (req, res) => {
   }
 })
 
-app.get('/api/auth/verify', authenticateToken, (req, res) => {
+app.get('/api/auth/verify', authRateLimiter, authenticateToken, (req, res) => {
   res.json({
     success: true,
     user: req.user
