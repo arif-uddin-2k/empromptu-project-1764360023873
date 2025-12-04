@@ -69,7 +69,7 @@ on:
     types: [ assigned, opened, synchronize, reopened, labeled, edited ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   crda-scan:
