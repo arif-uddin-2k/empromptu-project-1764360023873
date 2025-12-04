@@ -8794,7 +8794,7 @@ const _StyleElement = class _StyleElement extends Element {
     super(document2, node2, captureTextNodes);
     this.type = "style";
     var css = compressSpaces(
-      Array.from(node2.childNodes).map((_2) => _2.textContent).join("").replace(/(\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/)|(^[\s]*\/\/.*)/gm, "").replace(/@import.*;/g, "")
+      Array.from(node2.childNodes).map((_2) => _2.textContent).join("").replace(/(\/\*[\s\S]*?\*\/)|(^[\s]*\/\/.*)/gm, "").replace(/@import.*;/g, "")
       // remove imports
     );
     var cssDefs = css.split("}");
