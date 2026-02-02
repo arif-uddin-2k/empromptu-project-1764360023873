@@ -21,7 +21,7 @@
     "lucide-react": "^0.263.1",
     "date-fns": "^2.29.3",
     "xlsx": "^0.18.5",
-    "jspdf": "^4.0.0",
+    "jspdf": "^4.1.0",
     "jspdf-autotable": "^5.0.7",
     "serve": "^14.2.5",
     "signal-exit": "^4.1.0"
