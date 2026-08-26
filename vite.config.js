@@ -4,6 +4,7 @@ import eslint from 'vite-plugin-eslint2';
 import { resolve } from 'path';
 
 export default defineConfig({
+  base: '/empromptu-project-1764360023873/',
   plugins: [
     react(),
     eslint({
